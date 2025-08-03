@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.only('Browser Context Playwright test', async ({ page }) => {
+test('Browser Context Playwright test', async ({ page }) => {
   // You can use the provided 'page' object directly
   await page.goto('https://rahulshettyacademy.com/client');
   // Add your test steps here
