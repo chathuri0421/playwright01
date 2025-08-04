@@ -16,6 +16,8 @@ test('Browser Context Playwright test', async ({ browser }) => {
   console.log(text); // Log the text to verify
 });
 
+
+
 // test('Page Playwright test', async ({ page }) => {
 //   await page.goto("https://google.com");
 //   console.log(await page.title());
