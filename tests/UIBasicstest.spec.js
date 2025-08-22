@@ -49,7 +49,7 @@ test('Page Playwright test', async ({ page }) => {
 });
 test('child window handle', async ({ browser }) => 
 {
-  const context = await browser.newContext();
+const context = await browser.newContext();
 const page = await context.newPage();
 await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 const documentLink = page.locator("[href*='documents-request']");

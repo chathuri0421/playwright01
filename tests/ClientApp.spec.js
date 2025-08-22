@@ -40,10 +40,37 @@ test.only('Browser Context Playwright test', async ({ page }) => {
 
   await page.locator('[routerlink*="cart"]').click();
   console.log("Navigated to cart");
+  //// Wait for cart item to show up
   await page.locator('div li').first().waitFor();
-  //check if product is in cart
-const bool = await page.locator('h3:has-text("IPHONE 13 PRO")').isVisible();
-expect(bool).toBeTruthy();
 
-  //  await page.pause();
+  //check if product is in cart
+  const bool = await page.locator('h3:has-text("IPHONE 13 PRO")').isVisible();
+  expect(bool).toBeTruthy();
+  //click checkout button
+  // await page.locator('text=Checkout').click();
+  await page.getByRole('button', { name: 'Checkout❯', exact: true }).click();
+  console.log("Checkout button clicked");
+  
+
+const countryInput = page.locator('[placeholder*="Select Country"]');
+await countryInput.fill('India', { delay: 200 }); // type slowly to trigger dropdown
+
+
+// wait for options to appear
+const dropdown = page.locator('.ta-results');
+await expect(dropdown).toBeVisible();
+
+const dropdownCount = await dropdown.locator('button').count();
+for (let i = 0; i < dropdownCount; ++i) {
+  const optionText = (await dropdown.locator('button').nth(i).textContent()).trim();
+
+  if (optionText === 'India') {
+    await dropdown.locator('button').nth(i).click();
+    console.log("Country selected: India");
+    break;
+  }
+}
+
+
+  await page.pause();
 });
